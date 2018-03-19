@@ -1,6 +1,53 @@
 loopchain JSON RPC API V2 document
 ----------
 
+<!-- TOC depthFrom:1 depthTo:6 withLinks:1 updateOnSave:1 orderedList:0 -->
+
+- [icx_sendTransaction](#icxsendtransaction)
+	- [Request](#request)
+		- [JSON RPC data](#json-rpc-data)
+		- [Params](#params)
+		- [Additional information](#additional-information)
+			- [Generate tx_hash](#generate-txhash)
+			- [Generate signature](#generate-signature)
+		- [Example of request](#example-of-request)
+	- [Response](#response)
+		- [Successful case](#successful-case)
+		- [Unsuccessful case](#unsuccessful-case)
+- [icx_getTransactionResult](#icxgettransactionresult)
+	- [Request](#request)
+		- [JSON RPC data](#json-rpc-data)
+		- [Params](#params)
+			- [Example of request](#example-of-request)
+	- [Response](#response)
+		- [Successful case](#successful-case)
+		- [Unsuccessful case](#unsuccessful-case)
+- [icx_getBalance](#icxgetbalance)
+	- [Request](#request)
+		- [JSON RPC data](#json-rpc-data)
+		- [Params](#params)
+		- [Example of request](#example-of-request)
+	- [Response](#response)
+		- [Successful case](#successful-case)
+		- [Unsuccessful case](#unsuccessful-case)
+- [icx_getBlockByHeight](#icxgetblockbyheight)
+	- [Request](#request)
+		- [JSON RPC data](#json-rpc-data)
+		- [Params](#params)
+		- [Example of request](#example-of-request)
+	- [Response](#response)
+		- [Successful case](#successful-case)
+		- [TIP : To get the total block height of current block loopchain](#tip-to-get-the-total-block-height-of-current-block-loopchain)
+- [icx_getBlockByHash](#icxgetblockbyhash)
+	- [Request](#request)
+		- [JSON RPC data](#json-rpc-data)
+		- [Params](#params)
+		- [Example of request](#example-of-request)
+	- [Response](#response)
+		- [Successful case](#successful-case)
+
+<!-- /TOC -->
+
 # icx_sendTransaction
 
 Transfer ICX value from one wallet to another with the fee.
@@ -324,3 +371,176 @@ Get the balance of the wallet address.
     }
 }
 ```
+
+
+# icx_getBlockByHeight
+
+ Get block information and transactions by block height
+
+## Request
+### JSON RPC data
+
+* ```jsonrpc```: Fixed as "2.0"
+* ```method```:  "icx_getBlockByHeight"
+* ```id```: An identifier established by the Client that MUST contain a String, Number, or NULL value if included. If it is not included it is assumed to be a notification. The value SHOULD normally not be Null and Numbers SHOULD NOT contain fractional parts.
+
+### Params
+* ```height```: Block height
+
+### Example of request
+
+```json
+{
+    "jsonrpc" : "2.0",
+    "method": "icx_getBlockByHeight",
+    "id": 1234,
+    "params": {
+        "height": "1234"
+    }
+}
+```
+
+## Response
+
+* ```id```: It MUST be the same as the value of the id member in the Request Object.
+    * If there was an error in detecting the id in the Request object (e.g. Parse error/Invalid Request), it MUST be Null.
+* ``` response_code```: JSON RPC error code.
+* ```block```: Block information
+  - ```version``` : Version of block structure
+  - ```height```: Height of current block
+  - ```prev_block_hash```: Block hash of previous block
+  - ```merkle_tree_root_hash```:Merkle tree root hash of transactions in this block.
+  - ```time_stamp``` : UNIX epoch time (Begin from 1970.1.1 00:00:00)
+    * Unit: microseconds
+  - ```block_hash```: Hash of block
+  - ```peer_id```: Id of node
+  - ```signature```: See [this](icxsendtransaction) section
+  - ```confirmed_transaction_list```: List of transactions in this block.
+    - ```from``` : See [this](icxsendtransaction) section
+    - ```to``` : See [this](icxsendtransaction) section
+    - ```value``` : See [this](icxsendtransaction) section
+    - ```nonce``` : See [this](icxsendtransaction) section
+    - ```tx_hash``` : See [this](icxsendtransaction) section
+    - ```signature``` : See [this](icxsendtransaction) section
+    - ```method```: Fixed as "icx_sendTransaction"
+
+### Successful case
+
+```json
+{
+  "jsonrpc": "2.0",
+  "id": 1234,
+  "result": {
+    "response_code": 0,
+    "block": {
+      "version": "0.1a",
+      "prev_block_hash": "48757af881f76c858890fb41934bee228ad50a71707154a482826c39b8560d4b",
+      "merkle_tree_root_hash": "fabc1884932cf52f657475b6d62adcbce5661754ff1a9d50f13f0c49c7d48c0c",
+      "time_stamp": 1516498781094429,
+      "block_hash": "1fcf7c34dc875681761bdaa5d75d770e78e8166b5c4f06c226c53300cbe85f57",
+      "height": 3,
+      "peer_id": "e07212ee-fe4b-11e7-8c7b-acbc32865d5f",
+      "signature": "MEQCICT8mTIL6pRwMWsJjSBHcl4QYiSgG8+0H3U32+05mO9HAiBOhIfBdHNm71WpAZYwJWwQbPVVXFJ8clXGKT3ScDWcvw==",
+      "confirmed_transaction_list": [
+        {
+          "from": "hx63fac3fc777ad647d2c3a72cf0fc42d420a2ba81",
+          "to": "hx5f8bfd603f1712ccd335d7648fbc989f63251354",
+          "value": "0xde0b6b3a7640000",
+          "fee": "0x2386f26fc10000",
+          "nonce": "0x3",
+          "tx_hash": "fabc1884932cf52f657475b6d62adcbce5661754ff1a9d50f13f0c49c7d48c0c",
+          "signature": "cpSevyvPKC4OpAyywnoNyf0gamHylHOeuSPnLjkyILl1n9Xo4ygezzxda8LpcQ6K1rmo4JU+mXdh+Beh+/mhBgA=",
+          "method": "icx_sendTransaction"
+        }
+      ]
+    }
+  }
+}
+```
+### TIP : To get the total block height of current block loopchain
+ Request ```height``` as ```-1```. Then it returns the top block in blockchain. You can get the total block height by using ```result.height.height```.
+
+# icx_getBlockByHash
+
+Get block information and transactions by block hash.
+
+## Request
+### JSON RPC data
+
+* ```jsonrpc```: Fixed as "2.0"
+* ```method```:  "icx_getTransactionByAddress"
+* ```id```: An identifier established by the Client that MUST contain a String, Number, or NULL value if included. If it is not included it is assumed to be a notification. The value SHOULD normally not be Null and Numbers SHOULD NOT contain fractional parts.
+
+### Params
+* ```hash```: Hash of block
+
+### Example of request
+
+```json
+{
+   "jsonrpc" : "2.0",
+   "method": "icx_getTransactionByAddress",
+   "id": 1234,
+   "params": {
+       "hash": "af5570f5a1810b7af78caf4bc70a660f0df51e42baf91d4de5b2328de0e83dfc"
+   }
+}
+```
+
+## Response
+
+* ```id```: It MUST be the same as the value of the id member in the Request Object.
+   * If there was an error in detecting the id in the Request object (e.g. Parse error/Invalid Request), it MUST be Null.
+* ``` response_code```: JSON RPC error code.
+* ```block```: Block information
+ - ```version``` : Version of block structure
+ - ```height```: Height of current block
+ - ```prev_block_hash```: Block hash of previous block
+ - ```merkle_tree_root_hash```:Merkle tree root hash of transactions in this block.
+ - ```time_stamp``` : UNIX epoch time (Begin from 1970.1.1 00:00:00)
+   * Unit: microseconds
+ - ```block_hash```: Hash of block
+ - ```peer_id```: Id of node
+ - ```signature```: See [this](icxsendtransaction) section
+ - ```confirmed_transaction_list```: List of transactions in this block.
+   - ```from``` : See [this](icxsendtransaction) section
+   - ```to``` : See [this](icxsendtransaction) section
+   - ```value``` : See [this](icxsendtransaction) section
+   - ```nonce``` : See [this](icxsendtransaction) section
+   - ```tx_hash``` : See [this](icxsendtransaction) section
+   - ```signature``` : See [this](icxsendtransaction) section
+   - ```method```: Fixed as "icx_sendTransaction"
+
+### Successful case
+
+ ```json
+ {
+   "jsonrpc": "2.0",
+   "id": 1234,
+   "result": {
+     "response_code": 0,
+     "block": {
+       "version": "0.1a",
+       "prev_block_hash": "48757af881f76c858890fb41934bee228ad50a71707154a482826c39b8560d4b",
+       "merkle_tree_root_hash": "fabc1884932cf52f657475b6d62adcbce5661754ff1a9d50f13f0c49c7d48c0c",
+       "time_stamp": 1516498781094429,
+       "block_hash": "1fcf7c34dc875681761bdaa5d75d770e78e8166b5c4f06c226c53300cbe85f57",
+       "height": 3,
+       "peer_id": "e07212ee-fe4b-11e7-8c7b-acbc32865d5f",
+       "signature": "MEQCICT8mTIL6pRwMWsJjSBHcl4QYiSgG8+0H3U32+05mO9HAiBOhIfBdHNm71WpAZYwJWwQbPVVXFJ8clXGKT3ScDWcvw==",
+       "confirmed_transaction_list": [
+         {
+           "from": "hx63fac3fc777ad647d2c3a72cf0fc42d420a2ba81",
+           "to": "hx5f8bfd603f1712ccd335d7648fbc989f63251354",
+           "value": "0xde0b6b3a7640000",
+           "fee": "0x2386f26fc10000",
+           "nonce": "0x3",
+           "tx_hash": "fabc1884932cf52f657475b6d62adcbce5661754ff1a9d50f13f0c49c7d48c0c",
+           "signature": "cpSevyvPKC4OpAyywnoNyf0gamHylHOeuSPnLjkyILl1n9Xo4ygezzxda8LpcQ6K1rmo4JU+mXdh+Beh+/mhBgA=",
+           "method": "icx_sendTransaction"
+         }
+       ]
+     }
+   }
+ }
+ ```
