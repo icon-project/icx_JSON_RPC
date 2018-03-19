@@ -414,14 +414,14 @@ Get the balance of the wallet address.
     * Unit: microseconds
   - ```block_hash```: Hash of block
   - ```peer_id```: Id of node
-  - ```signature```: See [this](icxsendtransaction) section
+  - ```signature```: See [this](#request) section
   - ```confirmed_transaction_list```: List of transactions in this block.
-    - ```from``` : See [this](icxsendtransaction) section
-    - ```to``` : See [this](icxsendtransaction) section
-    - ```value``` : See [this](icxsendtransaction) section
-    - ```nonce``` : See [this](icxsendtransaction) section
-    - ```tx_hash``` : See [this](icxsendtransaction) section
-    - ```signature``` : See [this](icxsendtransaction) section
+    - ```from``` : See [this](#request) section
+    - ```to``` : See [this](#request) section
+    - ```value``` : See [this](#request) section
+    - ```nonce``` : See [this](#request) section
+    - ```tx_hash``` : See [this](#request) section
+    - ```signature``` : See [this](#request) section
     - ```method```: Fixed as "icx_sendTransaction"
 
 ### Successful case
@@ -501,14 +501,14 @@ Get block information and transactions by block hash.
    * Unit: microseconds
  - ```block_hash```: Hash of block
  - ```peer_id```: Id of node
- - ```signature```: See [this](icxsendtransaction) section
+ - ```signature```: See [this](#request) section
  - ```confirmed_transaction_list```: List of transactions in this block.
-   - ```from``` : See [this](icxsendtransaction) section
-   - ```to``` : See [this](icxsendtransaction) section
-   - ```value``` : See [this](icxsendtransaction) section
-   - ```nonce``` : See [this](icxsendtransaction) section
-   - ```tx_hash``` : See [this](icxsendtransaction) section
-   - ```signature``` : See [this](icxsendtransaction) section
+   - ```from``` : See [this](#request) section
+   - ```to``` : See [this](#request) section
+   - ```value``` : See [this](#request) section
+   - ```nonce``` : See [this](#request) section
+   - ```tx_hash``` : See [this](#request) section
+   - ```signature``` : See [this](#request) section
    - ```method```: Fixed as "icx_sendTransaction"
 
 ### Successful case
