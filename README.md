@@ -2,7 +2,7 @@ loopchain JSON RPC API V2 document
 ----------
 
 <!-- TOC depthFrom:1 depthTo:6 withLinks:1 updateOnSave:1 orderedList:0 -->
-
+- [Endpoint](#endpoint)
 - [icx_sendTransaction](#icxsendtransaction)
 	- [Request](#request)
 		- [JSON RPC data](#json-rpc-data)
@@ -47,6 +47,10 @@ loopchain JSON RPC API V2 document
 		- [Successful case](#successful-case)
 
 <!-- /TOC -->
+
+# Endpoint 
+ * Mainnet: https://wallet.icon.foundation/api/v2
+ * Testnet: https://testwallet.icon.foundation/api/v2
 
 # icx_sendTransaction
 
