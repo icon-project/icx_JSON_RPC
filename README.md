@@ -522,7 +522,7 @@ Get block information and transactions by block hash.
 ### JSON RPC data
 
  * ```jsonrpc```: Fixed as "2.0"
- * ```method```:  "icx_getTransactionByAddress"
+ * ```method```:  "icx_getLastBlock"
  * ```id```: An identifier established by the Client that MUST contain a String, Number, or NULL value if included. If it is not included it is assumed to be a notification. The value SHOULD normally not be Null and Numbers SHOULD NOT contain fractional parts.
 
 ### Params
@@ -532,8 +532,8 @@ Get block information and transactions by block hash.
 
  ```json
  {
-	 "jsonrpc" : "2.0",
- 	 "id": 1234,
+   "jsonrpc" : "2.0",
+   "id": 1234,
    "method": "icx_getLastBlock"
  }
  ```
