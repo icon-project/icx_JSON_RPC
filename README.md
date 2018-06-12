@@ -1,54 +1,19 @@
 loopchain JSON RPC API V2 document
-----------
+========
 
-<!-- TOC depthFrom:1 depthTo:6 withLinks:1 updateOnSave:1 orderedList:0 -->
+<!-- TOC depthFrom:1 depthTo:1 withLinks:1 updateOnSave:1 orderedList:undefined -->
+
 - [Endpoint](#endpoint)
 - [icx_sendTransaction](#icxsendtransaction)
-	- [Request](#request)
-		- [JSON RPC data](#json-rpc-data)
-		- [Params](#params)
-		- [Additional information](#additional-information)
-			- [Generate tx_hash](#generate-txhash)
-			- [Generate signature](#generate-signature)
-		- [Example of request](#example-of-request)
-	- [Response](#response)
-		- [Successful case](#successful-case)
-		- [Unsuccessful case](#unsuccessful-case)
 - [icx_getTransactionResult](#icxgettransactionresult)
-	- [Request](#request)
-		- [JSON RPC data](#json-rpc-data)
-		- [Params](#params)
-			- [Example of request](#example-of-request)
-	- [Response](#response)
-		- [Successful case](#successful-case)
-		- [Unsuccessful case](#unsuccessful-case)
 - [icx_getBalance](#icxgetbalance)
-	- [Request](#request)
-		- [JSON RPC data](#json-rpc-data)
-		- [Params](#params)
-		- [Example of request](#example-of-request)
-	- [Response](#response)
-		- [Successful case](#successful-case)
-		- [Unsuccessful case](#unsuccessful-case)
 - [icx_getBlockByHeight](#icxgetblockbyheight)
-	- [Request](#request)
-		- [JSON RPC data](#json-rpc-data)
-		- [Params](#params)
-		- [Example of request](#example-of-request)
-	- [Response](#response)
-		- [Successful case](#successful-case)
-		- [TIP : To get the total block height of current block loopchain](#tip-to-get-the-total-block-height-of-current-block-loopchain)
 - [icx_getBlockByHash](#icxgetblockbyhash)
-	- [Request](#request)
-		- [JSON RPC data](#json-rpc-data)
-		- [Params](#params)
-		- [Example of request](#example-of-request)
-	- [Response](#response)
-		- [Successful case](#successful-case)
+- [icx_getLastBlock](#icxgetlastblock)
 
 <!-- /TOC -->
 
-# Endpoint 
+# Endpoint
  * Mainnet: https://wallet.icon.foundation/api/v2
  * Testnet: https://testwallet.icon.foundation/api/v2
 
@@ -548,3 +513,55 @@ Get block information and transactions by block hash.
    }
  }
  ```
+
+# icx_getLastBlock
+
+ Get last block information and transactions.
+
+## Request
+### JSON RPC data
+
+ * ```jsonrpc```: Fixed as "2.0"
+ * ```method```:  "icx_getTransactionByAddress"
+ * ```id```: An identifier established by the Client that MUST contain a String, Number, or NULL value if included. If it is not included it is assumed to be a notification. The value SHOULD normally not be Null and Numbers SHOULD NOT contain fractional parts.
+
+### Params
+ * ```hash```: Hash of block
+
+### Example of request
+
+ ```json
+ {
+	 "jsonrpc" : "2.0",
+ 	 "id": 1234,
+   "method": "icx_getLastBlock"
+ }
+ ```
+
+## Response
+
+ * ```id```: It MUST be the same as the value of the id member in the Request Object.
+    * If there was an error in detecting the id in the Request object (e.g. Parse error/Invalid Request), it MUST be Null.
+ * ```result```: Block information
+	 - ```response_code```:JSON RPC error code.
+	 - ```block_data_json``` : Block data
+		 - ```prev_block_hash```: The hash of previous block hash
+		 - ```height```: The height of this block
+		 - ```block_hash```: The hash of last block.
+
+### Successful case
+
+  ```json
+  {
+		"jsonrpc": "2.0",
+		"id": 1234,
+    "result": {
+        "response_code": 0,
+        "block_data_json": {
+            "prev_block_hash": "",
+            "height": "0",
+            "block_hash": "af5570f5a1810b7af78caf4bc70a660f0df51e42baf91d4de5b2328de0e83dfc"
+        }
+    }
+  }
+  ```
