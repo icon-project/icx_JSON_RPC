@@ -1,4 +1,4 @@
-loopchain JSON RPC API V2 document
+ICON JSON RPC API V2 document
 ========
 
 <!-- TOC depthFrom:1 depthTo:1 withLinks:1 updateOnSave:1 orderedList:undefined -->
