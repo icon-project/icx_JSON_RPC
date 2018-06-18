@@ -4,12 +4,12 @@ ICON JSON RPC API V2 document
 <!-- TOC depthFrom:1 depthTo:1 withLinks:1 updateOnSave:1 orderedList:undefined -->
 
 - [Endpoint](#endpoint)
-- [icx_sendTransaction](#icxsendtransaction)
-- [icx_getTransactionResult](#icxgettransactionresult)
-- [icx_getBalance](#icxgetbalance)
-- [icx_getBlockByHeight](#icxgetblockbyheight)
-- [icx_getBlockByHash](#icxgetblockbyhash)
-- [icx_getLastBlock](#icxgetlastblock)
+- [icx_sendTransaction](#icx_sendtransaction)
+- [icx_getTransactionResult](#icx_gettransactionresult)
+- [icx_getBalance](#icx_getbalance)
+- [icx_getBlockByHeight](#icx_getblockbyheight)
+- [icx_getBlockByHash](#icx_getblockbyhash)
+- [icx_getLastBlock](#icx_getlastblock)
 
 <!-- /TOC -->
 
