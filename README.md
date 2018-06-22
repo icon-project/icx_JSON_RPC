@@ -544,24 +544,58 @@ Get block information and transactions by block hash.
     * If there was an error in detecting the id in the Request object (e.g. Parse error/Invalid Request), it MUST be Null.
  * ```result```: Block information
 	 - ```response_code```:JSON RPC error code.
-	 - ```block_data_json``` : Block data
-		 - ```prev_block_hash```: The hash of previous block hash
-		 - ```height```: The height of this block
-		 - ```block_hash```: The hash of last block.
+	 - ```block```: Block information
+	  - ```version``` : Version of block structure
+	  - ```prev_block_hash```: Block hash of previous block
+	  - ```merkle_tree_root_hash```:Merkle tree root hash of transactions in this block.
+	  - ```time_stamp``` : UNIX epoch time (Begin from 1970.1.1 00:00:00)
+	    * Unit: microseconds
+	  - ```confirmed_transaction_list```: List of transactions in this block.
+	    - ```from``` : See [this](#request) section
+	    - ```to``` : See [this](#request) section
+	    - ```value``` : See [this](#request) section
+	    - ```nonce``` : See [this](#request) section
+	    - ```tx_hash``` : See [this](#request) section
+	    - ```signature``` : See [this](#request) section
+	    - ```method```: Fixed as "icx_sendTransaction"
+	  - ```block_hash```: Hash of block
+	  - ```height```: Height of current block
+	  - ```peer_id```: Id of node
+	  - ```signature```: See [this](#request) section
+	
+		
 
 ### Successful case
 
   ```json
-  {
-		"jsonrpc": "2.0",
-		"id": 1234,
+{
+    "jsonrpc": "2.0",
     "result": {
         "response_code": 0,
-        "block_data_json": {
-            "prev_block_hash": "",
-            "height": "0",
-            "block_hash": "af5570f5a1810b7af78caf4bc70a660f0df51e42baf91d4de5b2328de0e83dfc"
+        "block": {
+            "version": "0.1a",
+            "prev_block_hash": "423b1c293f9c3618250c0ed071ee02943ee0b3d3578a27d45e93e01a28bbb465",
+            "merkle_tree_root_hash": "09a34405c44ca8fca9c2a1bb14da0d78aad2f295b2db01a005b801eb8498394b",
+            "time_stamp": 1529631853679726,
+            "confirmed_transaction_list": [
+                {
+                    "from": "hxa9a783effea6e17d78e100c2883beefb6c8f8840",
+                    "to": "hx4d41b920df9b161d0e1a5ad06b6c5380fbe03411",
+                    "value": "0x4563918244f40000",
+                    "fee": "0x2386f26fc10000",
+                    "timestamp": "1529631853018000",
+                    "nonce": "8367273",
+                    "tx_hash": "09a34405c44ca8fca9c2a1bb14da0d78aad2f295b2db01a005b801eb8498394b",
+                    "signature": "FJGkkD3l1q6aaqAdL3hU4jC/rsReJU9dJc7HzkW3GYnKteIuM05twFfksfXOuesurPVmEvAn8kuD1mPrORN2QgA=",
+                    "method": "icx_sendTransaction"
+                }
+            ],
+            "block_hash": "702fe614ef9680de0be0241f5a62b943e07ea298f461123c7b95cf0d60be8dca",
+            "height": 20343,
+            "peer_id": "hxbda7906f9969af02cc81ca9b8088263bd4f26d7f",
+            "signature": "hAMdNx8n0d5zlK8qnfbZIiqfOndAsK3GkYIeFNORuK1ePlU7Wxqbb1BPJN2ZGrdeOkJZ+rkHbbEx2oJAISa0sQE="
         }
-    }
-  }
+    },
+    "id": 1234
+}
   ```
